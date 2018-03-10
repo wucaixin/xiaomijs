@@ -66,7 +66,21 @@
 		})
 	})
 }
-
+{
+		let labels=document.querySelectorAll(".banner_nav li");
+		let menus=document.querySelectorAll(".menu");
+		let obj=menus[0];
+		labels.forEach(function(ele,index){
+			ele.onmouseenter=function(){
+				obj.style.display="none";
+				menus[index].style.display="block";
+				obj=menus[index];
+			}
+			ele.onmouseleave=function(){
+				menus[index].style.display="none";
+			}
+		})
+	}
 //闪购
 {
 	function shangou(parentt){
@@ -125,5 +139,90 @@
 	const dapeiList=document.querySelectorAll(".dapei_rightzong");
 	dapeiList.forEach(function(ele){
 		dapei(ele);
+	})
+}
+
+
+//内容
+{
+	function wheel(parent){
+		let prev=parent.querySelector(".neirong_lbtn");
+		let next=parent.querySelector(".neirong_gbtn");
+		let inner=parent.querySelector(".neirong_inner");
+		let contents=parent.querySelectorAll(".neirong_content");
+		let pagers=parent.querySelectorAll(".yuan");
+		let n=0;
+		next.onclick=function(){
+			n++;
+			if(n===contents.length){
+				n=contents.length-1;
+				return;
+			}
+			inner.style.left=n*-296+"px";
+			pagers[n].classList.add("active");
+			pagers[n-1].classList.remove("active");
+			obj=pagers[n];
+		};
+		prev.onclick=function(){
+			n--;
+			if(n<0){
+				n=0;
+				return;
+			}
+			inner.style.left=n*-296+"px";
+			pagers[n].classList.add("active");
+			pagers[n+1].classList.remove("active");
+			obj=pagers[n];
+		};
+		let obj=pagers[0];
+		pagers.forEach(function(ele,index){
+			ele.onclick=function(){
+				obj.classList.remove("active");
+				ele.classList.add("active");
+				obj=ele;
+				inner.style.left=index*-296+"px";
+				n=index;
+			}
+		})
+	}
+	let items=document.querySelectorAll(".neirong_item");
+	items.forEach(function(ele){
+		wheel(ele);
+	})
+}
+
+//顶部
+{
+	let box=document.querySelector(".nav");
+	let top=document.querySelector(".nav_wenzi");
+	let bottom=document.querySelector(".nav_bottom");
+	top.onmouseenter=function(){
+		bottom.style.height="230px";
+		bottom.style.shadow="0 10px 20px 5px #000";
+	}
+	box.onmouseleave=function(){
+		bottom.style.height="0";
+	}
+}
+
+
+{
+	function content(parent){
+		const types=parent.querySelectorAll(".type");
+		const goods=parent.querySelectorAll(".nav_bottom_items");
+		types.forEach(function(ele,index){
+			ele.onmouseover=function(){
+				for(let i=0;i<types.length;i++){
+					types[i].classList.remove("active");
+					goods[i].classList.remove("active");
+				}
+				this.classList.add("active");
+				goods[index].classList.add("active");
+			}
+		})
+	}
+	const contentlist=document.querySelectorAll(".zongbox");
+	contentlist.forEach(function(ele){
+		content(ele);
 	})
 }
