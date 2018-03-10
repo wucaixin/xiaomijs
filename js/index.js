@@ -193,16 +193,19 @@
 
 //顶部
 {
-	let box=document.querySelector(".nav");
 	let top=document.querySelector(".nav_wenzi");
 	let bottom=document.querySelector(".nav_bottom");
 	top.onmouseenter=function(){
 		bottom.style.height="230px";
-		bottom.style.shadow="0 10px 20px 5px #000";
+		bottom.style.borderTop="1px solid #e0e0e0";
+		bottom.style.boxShadow="0 3px 5px 0px rgba(133,133,133,0.5)";
 	}
-	box.onmouseleave=function(){
+	top.onmouseleave=function(){
 		bottom.style.height="0";
+		bottom.style.borderTop="none";
+		bottom.style.boxShadow="none";
 	}
+		
 }
 
 
@@ -210,6 +213,7 @@
 	function content(parent){
 		const types=parent.querySelectorAll(".type");
 		const goods=parent.querySelectorAll(".nav_bottom_items");
+		const contentlist=parent.querySelectorAll(".nav_zong");
 		types.forEach(function(ele,index){
 			ele.onmouseover=function(){
 				for(let i=0;i<types.length;i++){
@@ -221,7 +225,7 @@
 			}
 		})
 	}
-	const contentlist=document.querySelectorAll(".zongbox");
+	const contentlist=document.querySelectorAll(".nav_zong");
 	contentlist.forEach(function(ele){
 		content(ele);
 	})
